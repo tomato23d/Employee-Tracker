@@ -42,13 +42,13 @@ function printReport() {
     })
 };
 
-const insertSQLRecord = ({ firstname, lastname, roleindex, managerindex }) => { db.query(`INSERT INTO talents_db.employee VALUES ("${firstname}", "${lastname}", ${roleindex}, ${managerindex});`,(err) => {
+const insertSQLRecord = ({ firstname, lastname, roleindex, managerindex }) => { db.query(`INSERT INTO talents_db.employee (employee_first_name, employee_last_name, role_id, manager_id) VALUES ("${firstname}", "${lastname}", ${roleindex}, ${managerindex});`,(err) => {
     if(err) throw err;
     console.log("employee has been added");
     selectTask();
 }) };
 
-const updateSQLRecord = ({ updateemployeeindex, updateemployeecurrentrole, updateemployeenextrole }) => { db.query(`update talents_db.employee set role_id = ${updateemployeenextrole}  where employee_id = ${updateemployeeindex} and role_id = ${updateemployeecurrentrole};`, (err) =>{
+const updateSQLRecord = ({ updateemployeeindex, updateemployeecurrentrole, updateemployeenextrole }) => { db.query(`update talents_db.employee set role_id = ${updateemployeenextrole}  where id = ${updateemployeeindex} and role_id = ${updateemployeecurrentrole};`, (err) =>{
     if(err) throw err;
     console.log("employee hes been updated");
     selectTask();

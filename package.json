@@ -1,7 +1,7 @@
 {
-  "name": "EMPLOYEE-TRACKER",
+  "name": "employee-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Employee records management application is managed with command line scripts.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^8.2.4",
-    "mysql2": "^3.3.0"
+    "mysql2": "^3.4.2"
   }
 }
