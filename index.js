@@ -11,10 +11,10 @@ const db = mysql.createConnection({
 );
 
 
-const select_department = 'SELECT department_id, department_name FROM talents_db.department';
-const select_role = 'SELECT role_id, role_title, role_salary, department_id FROM talents_db.role';
-const select_employee = 'SELECT employee_id, employee_first_name, employee_last_name, role_id, manager_id FROM talents_db.employee;';
-const report = 'SELECT e.employee_id, e.employee_first_name, e.employee_last_name, e.manager_id, r.role_id,  r.role_title, r.role_salary, r.department_id, d.department_name FROM talents_db.employee e, talents_db.role r, talents_db.department d where e.role_id = r.role_id and r.department_id = d.department_id order by 1;';
+const select_department = 'SELECT id, department_name FROM talents_db.department';
+const select_role = 'SELECT id, role_title, role_salary, department_id FROM talents_db.role';
+const select_employee = 'SELECT id, employee_first_name, employee_last_name, role_id, manager_id FROM talents_db.employee;';
+const report = 'SELECT e.id, e.employee_first_name, e.employee_last_name, e.manager_id, r.id,  r.role_title, r.role_salary, r.department_id, d.department_name FROM talents_db.employee e, talents_db.role r, talents_db.department d where e.role_id = r.id and r.department_id = d.id order by 1;';
 
 
 function selectDepartment() {
@@ -42,13 +42,13 @@ function printReport() {
     })
 };
 
-const insertSQLRecord = ({ firstname, lastname, roleindex, managerindex }) => { db.query(`INSERT INTO talents_db.employee VALUES ("e0010", "${firstname}", "${lastname}", "${roleindex}", "${managerindex}");`,(err) => {
+const insertSQLRecord = ({ firstname, lastname, roleindex, managerindex }) => { db.query(`INSERT INTO talents_db.employee VALUES ("${firstname}", "${lastname}", ${roleindex}, ${managerindex});`,(err) => {
     if(err) throw err;
     console.log("employee has been added");
     selectTask();
 }) };
 
-const updateSQLRecord = ({ updateemployeeindex, updateemployeecurrentrole, updateemployeenextrole }) => { db.query(`update talents_db.employee set role_id = "${updateemployeenextrole}"  where employee_id = "${updateemployeeindex}" and role_id = "${updateemployeecurrentrole}";`, (err) =>{
+const updateSQLRecord = ({ updateemployeeindex, updateemployeecurrentrole, updateemployeenextrole }) => { db.query(`update talents_db.employee set role_id = ${updateemployeenextrole}  where employee_id = ${updateemployeeindex} and role_id = ${updateemployeecurrentrole};`, (err) =>{
     if(err) throw err;
     console.log("employee hes been updated");
     selectTask();
